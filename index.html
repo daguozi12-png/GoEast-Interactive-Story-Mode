@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Story — GoEast Mandarin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="story-header">
+      <h1>Interactive Story</h1>
+    </header>
+
+    <main class="main-content">
+      <!-- Scene + tooltip wrapper (tooltip at bottom center, below frame) -->
+      <div class="scene-and-tooltip">
+        <section class="scene-container" id="scene">
+          <div class="scene-inner" style="background-image: url('images/livingroom.png');">
+            <!-- Characters: fixed position & size; switch image via img src only -->
+            <div class="character character-mika" id="mika" data-character="mika" aria-label="Mika">
+              <img src="images/Mika.png" alt="Mika">
+            </div>
+            <div class="character character-xiaotian" id="xiaotian" data-character="xiaotian" aria-label="Xiaotian">
+              <img src="images/Xiaotian1.png" alt="Xiaotian">
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Question + three options (blue box, then pink boxes with Chinese + pinyin) -->
+      <div class="story-ui">
+        <p class="story-text" id="storyText" aria-hidden="true" style="display: none;"></p>
+        <div class="choices" id="choices" aria-hidden="true" style="display: none;">
+          <button type="button" class="choice-btn" data-choice="A">A</button>
+          <button type="button" class="choice-btn" data-choice="B">B</button>
+          <button type="button" class="choice-btn" data-choice="C">C</button>
+        </div>
+        <div class="mika-prompt-block" id="mikaPromptBlock">
+          <div class="mika-prompt-row" id="mikaPromptRow">
+            <div class="mika-click-tooltip" id="mikaTooltip" aria-live="polite">Ask her where she is.</div>
+            <div class="mika-options" id="mikaOptions" aria-hidden="true">
+            <button type="button" class="mika-option-btn" data-mika="hello"><span class="mika-option-chinese">你好！</span><span class="mika-option-pinyin">nǐ hǎo!</span></button>
+            <button type="button" class="mika-option-btn" data-mika="where"><span class="mika-option-chinese">你在哪里？</span><span class="mika-option-pinyin">nǐ zài nǎlǐ?</span></button>
+            <button type="button" class="mika-option-btn" data-mika="do"><span class="mika-option-chinese">你做什么？</span><span class="mika-option-pinyin">nǐ zuò shénme?</span></button>
+            </div>
+          </div>
+          <div class="mika-response-box" id="mikaResponseBox" aria-live="polite"><span class="mika-response-chinese">你在哪里啊？</span><span class="mika-response-pinyin">nǐ zài nǎlǐ a?</span></div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="story-footer">
+      <p>GoEast Mandarin — Interactive Storytelling</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
