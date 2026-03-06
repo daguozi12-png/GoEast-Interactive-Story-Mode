@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Story — GoEast Mandarin</title>
+  <title>Mika and Xiaotian at Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="scene-container">
   <div class="page-wrapper">
     <header class="story-header">
-      <h1>Interactive Story</h1>
+      <h1>Mika and Xiaotian at Home</h1>
     </header>
 
     <main class="main-content">
@@ -18,15 +19,26 @@
         <section class="scene-container" id="scene">
           <div class="scene-inner" style="background-image: url('images/livingroom.png');">
             <!-- Characters: fixed position & size; switch image via img src only -->
+            <div class="mika-speech-bubble" id="mikaSpeechBubble" aria-hidden="true">
+              <span class="mika-speech-chinese">我在家里</span>
+              <span class="mika-speech-pinyin">wǒ zài jiālǐ</span>
+            </div>
             <div class="character character-mika" id="mika" data-character="mika" aria-label="Mika">
               <img src="images/Mika.png" alt="Mika">
             </div>
             <div class="character character-xiaotian" id="xiaotian" data-character="xiaotian" aria-label="Xiaotian">
               <img src="images/Xiaotian1.png" alt="Xiaotian">
             </div>
+            <div class="xiaotian-speech-bubble" id="xiaotianSpeechBubble" aria-hidden="true">
+              <span class="xiaotian-speech-chinese">我也在家里</span>
+              <span class="xiaotian-speech-pinyin">wǒ yě zài jiālǐ</span>
+            </div>
           </div>
         </section>
       </div>
+
+      <!-- Start prompt (hidden after first click on Mika) -->
+      <div class="start-prompt-box" id="startPromptBox">Click on Mika to Start!</div>
 
       <!-- Question + three options (blue box, then pink boxes with Chinese + pinyin) -->
       <div class="story-ui">
@@ -46,6 +58,7 @@
             </div>
           </div>
           <div class="mika-response-box" id="mikaResponseBox" aria-live="polite"><span class="mika-response-chinese">你在哪里啊？</span><span class="mika-response-pinyin">nǐ zài nǎlǐ a?</span></div>
+          <div class="xiaotian-prompt-box" id="xiaotianPromptBox" aria-live="polite">Where is Xiaotian?</div>
         </div>
       </div>
     </main>
@@ -53,6 +66,7 @@
     <footer class="story-footer">
       <p>GoEast Mandarin — Interactive Storytelling</p>
     </footer>
+  </div>
   </div>
 
   <script src="script.js"></script>
