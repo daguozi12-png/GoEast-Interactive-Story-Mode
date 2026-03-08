@@ -90,6 +90,70 @@ body {
   height: 87%;
 }
 
+/* Scene objects (cat, books, basketball) — shown after 小天：我也在家里 ends */
+.scene-object {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+.scene-object.is-visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.scene-object.is-visible.objects-locked {
+  pointer-events: none;
+  cursor: default;
+}
+
+.scene-object img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+  /* White outline (stroke) only, no glow */
+  filter: drop-shadow(0 -2px 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(2px 0 0 #fff)
+          drop-shadow(-1px -1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(1px 1px 0 #fff) drop-shadow(-1px 1px 0 #fff);
+}
+
+.scene-object:hover img {
+  transform: scale(1.12);
+}
+
+.scene-cat {
+  left: 5%;
+  bottom: 6%;
+  width: 20%;
+  height: 38%;
+  object-position: bottom left;
+}
+
+.scene-books {
+  left: 44%;
+  bottom: 2%;
+  width: 12%;
+  height: 18%;
+  object-position: bottom center;
+}
+
+.scene-basketball {
+  right: 10%;
+  bottom: 12%;
+  top: auto;
+  width: 10%;
+  height: 16%;
+  left: auto;
+  object-position: bottom right;
+}
+
 /* Speech bubble when Mika2 is shown — to her left, arrow pointing to her */
 .mika-speech-bubble {
   display: none;
@@ -123,8 +187,17 @@ body {
   height: 0;
 }
 
+.mika-speech-bubble {
+  transition: opacity 0.5s ease;
+}
+
 .mika-speech-bubble.is-visible {
   display: flex;
+}
+
+.mika-speech-bubble.fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .mika-speech-chinese {
@@ -176,8 +249,17 @@ body {
   height: 0;
 }
 
+.xiaotian-speech-bubble {
+  transition: opacity 0.5s ease;
+}
+
 .xiaotian-speech-bubble.is-visible {
   display: flex;
+}
+
+.xiaotian-speech-bubble.fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .xiaotian-speech-chinese {
@@ -248,24 +330,24 @@ body {
   visibility: hidden;
 }
 
-/* When options are visible: blue box on left, three options take the rest (side by side) */
+/* When options are visible: blue box on its own row above pink options so they never overlap */
 .mika-prompt-block.has-options .mika-prompt-row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 .mika-prompt-block.has-options .mika-click-tooltip {
   margin: 0;
   flex-shrink: 0;
+  order: 1;
 }
 
 .mika-prompt-block.has-options .mika-options {
-  flex: 1;
-  min-width: 0;
+  flex: none;
   margin-top: 0;
+  order: 2;
 }
 
 .mika-click-tooltip {
@@ -297,6 +379,24 @@ body {
   display: block;
 }
 
+.objects-prompt-box {
+  display: none;
+  margin: 0.75rem auto 0;
+  width: max-content;
+  max-width: 90%;
+  padding: 2.75rem 4.5rem;
+  background: #4AAFFF;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: clamp(2.4rem, 5.5vh, 3rem);
+}
+
+.objects-prompt-box.is-visible {
+  display: block;
+}
+
 .mika-options {
   display: none;
   flex-direction: row;
@@ -318,10 +418,12 @@ body {
   justify-content: center;
   padding: 1.65rem 2.5rem;
   min-width: 12.5rem;
+  width: max-content;
   min-height: 5rem;
   background: #F57AB5;
   color: #fff;
   border: none;
+  flex-shrink: 0;
   border-radius: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -360,6 +462,7 @@ body {
   display: block;
   font-size: clamp(2.4rem, 5.8vh, 2.9rem);
   opacity: 0.95;
+  white-space: nowrap;
 }
 
 .mika-response-box {
@@ -375,6 +478,11 @@ body {
   border-radius: 20px;
   font-weight: bold;
   transition: opacity 0.4s ease;
+}
+
+.mika-response-box.fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .mika-response-box.replaced {
